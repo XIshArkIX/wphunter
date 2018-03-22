@@ -75,36 +75,36 @@ function path_disclosure($url){
 		}
 			$search = array('Strict-Transport-Security','Content-Security-Policy','X-Frame-Options','X-XSS-Protection',
 			'X-Content-Type-Options','Referrer-Policy');
-			echo "\033[1;33m Missing Headers: \033[0m".PHP_EOL;
+			echo "\033[1;33m Отсутствуют заголовки: \033[0m".PHP_EOL;
 			list($a,$b,$c,$d,$e,$f) = $search;
 
 			if (isset($result[strtoupper($a)])) {
-				echo $a.'Установлена защита от атак типа «человек в середине»'.PHP_EOL;
+				echo $a.' \033[1;31mУстановлена защита от атак типа «человек в середине»\033[0m'.PHP_EOL;
 				}else
-				echo $a."Защита от атак типа «человек-в-середине» \033[1;31m не установлена \033[0m".PHP_EOL;
+				echo $a." \033[1m\033[0;32mЗащита от атак типа «человек-в-середине» не установлена \033[0m".PHP_EOL;
 			if (isset($result[strtoupper($b)])) {
-				echo $b.'Защита от возможных фишинг или XSS атак установлена'.PHP_EOL;
+				echo $b.' \033[1;31mЗащита от возможных фишинг или XSS атак установлена\033[0m'.PHP_EOL;
 				}else
-				echo $b."Защита от возможных фишинг или XSS атак\033[1;31m  не установлена\033[0m".PHP_EOL;
+				echo $b." \033[1m\033[0;32mЗащита от возможных фишинг или XSS атак не установлена\033[0m".PHP_EOL;
 			if (isset($result[strtoupper($c)])) {
-				 echo $c.'Защита от атаки «Clickjacking» установлена'.PHP_EOL;
+				 echo $c.' \033[1;31mЗащита от атаки «Clickjacking» установлена\033[0m'.PHP_EOL;
 				}else
-				 echo $c."Защита от атаки «Clickjacking» установлена \033[1;31m не установлена\033[0m".PHP_EOL;
+				 echo $c." \033[1m\033[0;32mЗащита от атаки «Clickjacking» не установлена\033[0m".PHP_EOL;
 
 			if (isset($result[strtoupper($d)])) {
-				echo $d.' Смягчение атаки (XSS) установлено'.PHP_EOL;
+				echo $d.' \033[1;31mСмягчение атаки (XSS) установлено\033[0m'.PHP_EOL;
 				}else
-				echo $d."  Смягчение атаки (XSS) установлено\033[1;31m  не установлено\033[0m".PHP_EOL;
+				echo $d." \033[1m\033[0;32mСмягчение атаки (XSS) установлено не установлено\033[0m".PHP_EOL;
 
 			if (isset($result[strtoupper($e)])) {
-				echo $e.'Защита от фишинга или XSS атак установлена'.PHP_EOL;
+				echo $e.' \033[1;31mЗащита от фишинга или XSS атак установлена\033[0m'.PHP_EOL;
 				}else
-				echo $e." Защита от фишинга или XSS атак \033[1;31m не утсановлена\033[0m".PHP_EOL;
+				echo $e." \033[1m\033[0;32mЗащита от фишинга или XSS атак не установлена\033[0m".PHP_EOL;
 
 			if (isset($result[strtoupper($f)])) {
-				echo $f.'Защита от фишинга или XSS атак установлена'.PHP_EOL;
+				echo $f.' \033[1;31mЗащита от фишинга или XSS атак \033[0m'.PHP_EOL;
 				}else
-				echo $f." Защита от атаки «Clickjacking» установлена \033[1;31m не установлена\033[0m".PHP_EOL;
+				echo $f." \033[1m\033[0;32mЗащита от атаки «Clickjacking» не установлена\033[0m".PHP_EOL;
 	}
 
 	function backup_fuzzer($url){
@@ -140,7 +140,7 @@ function path_disclosure($url){
 	     \   (            )   /
 	          \          /
 	     WPHunter.co
-			 RU by XI_shArk_IX (https://github.com/XIshArkIX)
+	RU by XI_shArk_IX (https://github.com/XIshArkIX)
 			 "."\033[0m".PHP_EOL;
 	$param = $_SERVER["argv"][1];
 
