@@ -94,7 +94,7 @@ function path_disclosure($url){
 			if (isset($result[strtoupper($d)])) {
 				echo $d.' \033[1;31mСмягчение атаки (XSS) установлено\033[0m'.PHP_EOL;
 				}else
-				echo $d." \033[1m\033[0;32mСмягчение атаки (XSS) установлено не установлено\033[0m".PHP_EOL;
+				echo $d." \033[1m\033[0;32mСмягчение атаки (XSS) не установлено\033[0m".PHP_EOL;
 
 			if (isset($result[strtoupper($e)])) {
 				echo $e.' \033[1;31mЗащита от фишинга или XSS атак установлена\033[0m'.PHP_EOL;
