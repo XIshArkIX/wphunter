@@ -10,8 +10,8 @@ function sendRequest($url,$ssl=false){
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 			curl_setopt($ch, CURLOPT_HEADER, 0);
 			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 0);
-			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
-			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST,1);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, $ssl);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST,$ssl);
 			curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
 			curl_setopt($ch, CURLOPT_VERBOSE, 0);
 			$result = curl_exec($ch);
@@ -140,7 +140,7 @@ function path_disclosure($url){
 	     \   (            )   /
 	          \          /
 	     WPHunter.co
-	RU by XI_shArk_IX (https://github.com/XIshArkIX)
+RU by XI_shArk_IX (https://github.com/XIshArkIX)
 			 "."\033[0m".PHP_EOL;
 	$param = $_SERVER["argv"][1];
 
@@ -150,8 +150,8 @@ function path_disclosure($url){
 	}
 	if(empty($param))
 	{
-	    echo "\033[1;35m Ты не указал ссылку! Пожалуйста используй конструкцию наподобие этой: php ".$_SERVER["argv"][0]." https://www.example.com"."\033[0m".PHP_EOL;
-	    die;
+		echo "\033[1;35m Ты не указал ссылку! Пожалуйста используй конструкцию наподобие этой: php ".$_SERVER["argv"][0]." https://www.example.com"."\033[0m".PHP_EOL;
+		die;
 	}
 
 	if (filter_var($param, FILTER_VALIDATE_URL) === FALSE) {
@@ -170,9 +170,9 @@ function path_disclosure($url){
 	   }
 
 	$count=1;
-		echo "\033[1;31m Сканирую цель... "."\033[0m";
-		sleep(1);echo ".";sleep(1);echo ".";sleep(1);echo ".";sleep(1);echo ".".PHP_EOL."\033[0m";
-		$url= $_SERVER["argv"][1].'/';
+	echo "\033[1;31m Сканирую цель"."\033[0m";
+	sleep(1);echo "\033[1;31m.";sleep(1);echo ".";sleep(1);echo ".";sleep(1);echo ".".PHP_EOL."\033[0m";
+	$url= $_SERVER["argv"][1].'/';
 		$array =   array('wp-admin','wp-content','wp-includes');
 		for($i=0;$i<=count($array);$i++){
 			$result =get_headers($url.$array[$i],1);
@@ -180,7 +180,7 @@ function path_disclosure($url){
 			$res=($http_response_header[0]);
 			if($res == 'HTTP/1.1 404 Not Found' || $res == 'HTTP/1.0 404 Not Found'){
 			   if($i == 2){
-				 echo "\033[2;33m Вебсайт не использует WordPress! "."\033[0m\n";
+					 echo "\033[2;33m Вебсайт не использует WordPress! "."\033[0m\n";
 				 exit;
 				}
 			}
@@ -188,7 +188,7 @@ function path_disclosure($url){
 		echo "\033[1;31m Идёт дамп пользователей.";sleep(1);echo ".";sleep(1);echo "."."\033[0m".PHP_EOL;
 		//sleep(1);
 		echo "-------------------------------------------\n";
-		$mask = "|%5.5s || %-30.40s ||\n";
+		$mask = "||%5.5s || %-30.40s ||\n";
 		printf($mask, 'ID', '  Users');
 		echo "-------------------------------------------\n";
 		//sleep(1);
@@ -221,12 +221,13 @@ function path_disclosure($url){
 			    printf($mask, $j, $user);
 			}
 			if($j > 21 && $user == ''){
-				printf($mask, '', "Не могу получить пользователей! Возможно, они кончились или что-то пошло не так.");
+				printf($mask, '', "Конец списка.                  ");
 			}
 		}
 
 		//sleep(1);
 		echo "-----------------------------------------------\n";
+		echo("\033[43m\033[30m[!]\033[0m  Возможно что-то пошло не так или список пользователей просто закончился.\n");
 		echo "Кол-во найденных пользователей  ".count($count1).PHP_EOL;
 		echo "Найденный сервер  ".$server.PHP_EOL;
 		if(!empty($lang)){
@@ -282,7 +283,7 @@ function path_disclosure($url){
 					 for($i=0;$i<=count($plugins);$i++){
 						$plugin_name = str_replace($array,'',$plugins);
 						if(!empty($plugin_name[$i])){
-						echo "Установленные плагины: ".$plugin_name[$i]."\n";
+							echo "Установленные плагины: ".$plugin_name[$i]."\n";
 						}
 					}
 
@@ -410,16 +411,16 @@ function path_disclosure($url){
 				// 	$fixed_in='Not Patched';
 				// }
 				if(!empty($title)){
-				  echo "\033[1;31m [+] Уязвимость:  $title "."\033[0m"."\n";
+					echo "\033[1;31m\033[47m[+] \033[0mУязвимость:  $title "."\033[0m"."\n";
 				}
 				//echo "[+] ID: ".$vuln_id."\n";
 				if(!empty($url)){
 			      foreach($url as $urls){
-				  echo "[+] Справка: ".$urls."\n";
+							echo "\033[0;32m[+] \033[0mСправка: ".$urls."\n";
 				  }
 				}
 				if(!empty($cve)){
-				  echo "[+] БДОУИД(CVE): ".$cve[0]."\n";
+					echo "\033[0;37m[+] \033[0mБДОУИД(CVE): ".$cve[0]."\n";
 				}
 				//echo "[+] Fixed in: ".$fixed_in."\n";
 				// if(!empty($fixed_in)){
@@ -430,20 +431,20 @@ function path_disclosure($url){
 			$d = sendRequest("https://www.wphunter.co/api/list.php?site=".$url);
 			$s = json_decode($d,TRUE);
 			echo "\033[1;34m [+] Проверка веб-сайта от вредоносного ПО и домена черного списка"."\033[0m"."\n\n";sleep(1);
-			echo "[+] Kaspersky: ".$s["scans"]['Kaspersky']['result']."\n";sleep(1);
-			echo "[+] BitDefender: ".$s["scans"]['BitDefender']['result']."\n";sleep(1);
+			echo "[+] Kaspersky: ".$s["scans"]['Kaspersky']['result']."\n";
+			echo "[+] BitDefender: ".$s["scans"]['BitDefender']['result']."\n";
 			echo "[+] ESET: ".$s["scans"]['ESET']['result']."\n";
 			echo "[+] Avira: ".$s["scans"]['Avira']['result']."\n";
 			echo "[+] Google Safebrowsing: ".$s["scans"]['Google Safebrowsing']['result']."\n";
 			echo "[+] OpenPhish: ".$s["scans"]['OpenPhish']['result']."\n";
-			echo "[+] DNS8: ".$s["scans"]['DNS8']['result']."\n"; sleep(1);
+			echo "[+] DNS8: ".$s["scans"]['DNS8']['result']."\n";
 			echo "[+] VX Vault: ".$s["scans"]['VX Vault']['result']."\n";
 			echo "[+] ZDB Zeus: ".$s["scans"]['ZDB Zeus']['result']."\n";
 			echo "[+] ZCloudsec: ".$s["scans"]['ZCloudsec']['result']."\n";
 			echo "[+] PhishLabs: ".$s["scans"]['PhishLabs']['result']."\n";
 			echo "[+] Zerofox: ".$s["scans"]['Zerofox']['result']."\n";
 			echo "[+] K7AntiVirus: ".$s["scans"]['K7AntiVirus']['result']."\n";
-			echo "[+] FraudSense: ".$s["scans"]['FraudSense']['result']."\n"; sleep(1);
+			echo "[+] FraudSense: ".$s["scans"]['FraudSense']['result']."\n";
 			echo "[+] Virusdie External Site Scan: ".$s["scans"]['Virusdie External Site Scan']['result']."\n";
 			echo "[+] Quttera: ".$s["scans"]['Quttera']['result']."\n";
 			echo "[+] AegisLab WebGuard: ".$s["scans"]['AegisLab WebGuard']['result']."\n";
