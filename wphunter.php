@@ -118,7 +118,7 @@ function path_disclosure($url){
 			$res=$http_response_header[0];
 			//print_r($res);
 			if (strchr($res,'200')) {
-				echo "\033[1;35m найдены файлы: \033[0m".$url.$data[$i]."\n";
+				echo "\033[1;35m Найдены файлы: \033[0m".$url.$data[$i]."\n";
 			}
 		}
 	}
@@ -233,7 +233,7 @@ RU by XI_shArk_IX (https://github.com/XIshArkIX)
 		if(!empty($lang)){
 		echo "Технологии: ".trim($lang[1]).PHP_EOL;
 		}
-		echo "\033[1;31m Пожалуйста подождите .";sleep(1);echo ".";sleep(1);echo "."."\033[0m".PHP_EOL;
+		echo "\033[1;31m Пожалуйста подождите.";sleep(1);echo ".";sleep(1);echo "."."\033[0m".PHP_EOL;
 
 	    $array =   array('wp-admin','wp-content','wp-includes','readme.html');
 		$j=0;
@@ -411,7 +411,7 @@ RU by XI_shArk_IX (https://github.com/XIshArkIX)
 				// 	$fixed_in='Not Patched';
 				// }
 				if(!empty($title)){
-					echo "\033[1;31m\033[47m[+] \033[0mУязвимость:  $title "."\033[0m"."\n";
+					echo "\033[1;31m\033[47m[+]\033[0m Уязвимость:  $title "."\033[0m"."\n";
 				}
 				//echo "[+] ID: ".$vuln_id."\n";
 				if(!empty($url)){
